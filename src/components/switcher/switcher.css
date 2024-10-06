@@ -1,0 +1,53 @@
+/* Основные стили для переключателя */
+.switch {
+  position: relative;
+  width: 60px;
+  height: 30px;
+  border-radius: 34px;
+  box-shadow: var(--shadow);
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+/* Back part */
+.switch label {
+  position: absolute;
+  cursor: pointer;
+  background-color: var(--switcher-bg-not-done-color);
+  border-radius: 34px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
+}
+
+/* Стили для переключателя */
+.switch label::before {
+  content: "";
+  background-image: url(./notDone.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: 4px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.15s;
+}
+
+/* Изменение стиля при включении (когда нажат чекбокс) */
+input:checked + label {
+  background-color: var(--switcher-bg-done-color);
+}
+
+input:checked + label::before {
+  transform: translateX(26px);
+  background-image: url(./done.png);
+}

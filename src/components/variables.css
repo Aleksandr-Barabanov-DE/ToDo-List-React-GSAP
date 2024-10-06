@@ -1,0 +1,10 @@
+:root {
+  --background-color: rgb(238, 235, 235);
+  --app-background-color: dimgrey;
+  --switcher-bg-not-done-color: #0a52ef;
+  --switcher-bg-done-color: #4caf50;
+  --main-font: "Protest Strike", sans-serif;
+  --shadow: 2px 2px 5px #333;
+  --main-text-color: #fff;
+  --checked-text-color: rgb(98, 96, 96);
+}

@@ -1,0 +1,107 @@
+.list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 20px;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.list-item {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  text-transform: uppercase;
+  text-shadow: var(--shadow);
+}
+
+.checked {
+  color: var(--checked-text-color);
+}
+
+li {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  box-shadow: var(--shadow);
+  border-radius: 10px;
+}
+
+.item-container-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+}
+
+.item-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+input::placeholder {
+  font-family: var(--main-font);
+  padding: 10px;
+  text-transform: uppercase;
+}
+
+input {
+  display: flex;
+  width: 100%;
+}
+
+.input-wrapper input {
+  font-family: var(--main-font);
+  font-size: 16px;
+  color: #333;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+.item-text {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+  padding: 2px;
+}
+
+button {
+  padding: 7px 10px;
+  font-family: var(--main-font);
+  text-transform: uppercase;
+  border: none;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  box-shadow: var(--shadow);
+}
+
+.add-button {
+  background-color: #4caf50;
+  width: 50%;
+}
+
+.delete-button {
+  display: none;
+  background-color: rgb(232, 22, 22);
+  width: 50%;
+}
+
+.delete-one-button {
+  background-color: darkgoldenrod;
+  width: 40%;
+}
