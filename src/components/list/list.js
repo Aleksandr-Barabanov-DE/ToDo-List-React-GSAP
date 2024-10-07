@@ -1,6 +1,6 @@
 import "../switcher/switcher.css";
 import "./list.css";
-import { Switch } from "../switcher/switcher";
+import { Switch } from "../switcher/Switcher";
 import { Component } from "react";
 import gsap from "gsap";
 
