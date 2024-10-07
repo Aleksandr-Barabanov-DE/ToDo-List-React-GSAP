@@ -1,158 +1,129 @@
+import React, { useState, useEffect, useRef } from "react";
 import "../switcher/switcher.css";
 import "./list.css";
 import { Switch } from "../switcher/Switcher";
-import { Component } from "react";
 import gsap from "gsap";
 
-export class List extends Component {
-  constructor() {
-    super();
-    this.state = {
-      userInput: "",
-      list: [],
-    };
-  }
+export const List = () => {
+  const [userInput, setUserInput] = useState("");
+  const [list, setList] = useState([]);
+  const listContainerRef = useRef(null);
+  const deleteAllRef = useRef(null);
 
-  componentDidMount() {
-    // Загрузка списка из localStorage
+  useEffect(() => {
     const savedList = localStorage.getItem("todoList");
     if (savedList) {
-      this.setState({ list: JSON.parse(savedList) });
+      setList(JSON.parse(savedList));
     }
 
-    gsap.set(".list-container", { x: -30, opacity: 0 });
-
-    gsap.to(".list-container", {
+    gsap.set(listContainerRef.current, { x: -30, opacity: 0 });
+    gsap.to(listContainerRef.current, {
       duration: 1.5,
       opacity: 1,
       x: 0,
       ease: "power2.out",
     });
-  }
+  }, []);
 
-  onFormSubmit(event) {
-    event.preventDefault();
-  }
-
-  onChangeEvent(event) {
-    this.setState({ userInput: event });
-  }
-
-  addItem(userInput) {
-    if (userInput.length === 0 || userInput === "") {
+  const addItem = () => {
+    if (userInput.trim() === "") {
       alert("Please enter an item");
-      return false;
+      return;
     }
-    let listArr = [...this.state.list];
-    let listArrLength = listArr.length;
-    listArr.push({ text: userInput, isChecked: false });
 
-    // Обновляем состояние и сохраняем в localStorage
-    this.setState({ list: listArr, userInput: "" }, () => {
-      localStorage.setItem("todoList", JSON.stringify(listArr));
+    const newItem = { text: userInput.trim(), isChecked: false };
+    const updatedList = [...list, newItem];
 
-      const newItemIndex = listArr.length - 1; // Индекс только что добавленного элемента
-      const newItem = document.querySelector(
-        `.list-item:nth-child(${newItemIndex + 1})`
-      );
+    setList(updatedList);
+    setUserInput(""); // Очистка поля ввода
+    localStorage.setItem("todoList", JSON.stringify(updatedList));
 
-      // Устанавливаем начальное состояние для анимации
-      gsap.fromTo(
-        newItem,
-        { opacity: 0, x: -30 }, // Начальное состояние
-        { duration: 0.5, opacity: 1, x: 0, ease: "power2.out" } // Конечное состояние
-      );
-    });
+    const newItemIndex = updatedList.length - 1;
+    const newItemElement = listContainerRef.current.children[newItemIndex];
 
-    if (listArrLength > 0) {
-      const deleteAll = document.querySelector(".delete-button");
-      deleteAll.style.display = "flex";
-    }
-  }
+    // Устанавливаем начальное состояние для анимации
+    gsap.fromTo(
+      newItemElement,
+      { opacity: 0, x: -30 },
+      { duration: 0.5, opacity: 1, x: 0, ease: "power2.out" }
+    );
+  };
 
-  deleteItems() {
-    let listArr = [];
-    this.setState({ list: listArr }, () => {
-      localStorage.setItem("todoList", JSON.stringify(listArr)); // Очищаем localStorage
-    });
-    const deleteAll = document.querySelector(".delete-button");
-    deleteAll.style.display = "none";
-  }
+  const deleteItems = () => {
+    setList([]);
+    localStorage.removeItem("todoList");
+  };
 
-  deleteItem(index) {
-    const updatedList = [...this.state.list];
-    updatedList.splice(index, 1);
-    this.setState({ list: updatedList }, () => {
-      localStorage.setItem("todoList", JSON.stringify(updatedList)); // Сохраняем обновленный список
-    });
-  }
+  const deleteItem = (index) => {
+    const updatedList = list.filter((_, i) => i !== index);
+    setList(updatedList);
+    localStorage.setItem("todoList", JSON.stringify(updatedList));
+  };
 
-  toggleItem(index) {
-    const updatedList = [...this.state.list];
-    updatedList[index].isChecked = !updatedList[index].isChecked;
-    this.setState({ list: updatedList }, () => {
-      localStorage.setItem("todoList", JSON.stringify(updatedList)); // Сохраняем обновленный список
-    });
-  }
+  const toggleItem = (index) => {
+    const updatedList = list.map((item, i) =>
+      i === index ? { ...item, isChecked: !item.isChecked } : item
+    );
+    setList(updatedList);
+    localStorage.setItem("todoList", JSON.stringify(updatedList));
+  };
 
-  render() {
-    return (
-      <div className="list-container">
-        <form action="" className="form" onSubmit={this.onFormSubmit}>
-          <div className="input-wrapper">
-            <input
-              className="container-input"
-              type="text"
-              placeholder="What do we need to do?"
-              onChange={(event) => {
-                this.onChangeEvent(event.target.value);
-              }}
-              value={this.state.userInput}
-            />
-          </div>
-          <button
-            className="button add-button"
-            onClick={() => this.addItem(this.state.userInput)}
+  return (
+    <div className="list-container" ref={listContainerRef}>
+      <form
+        className="form"
+        onSubmit={(e) => {
+          e.preventDefault();
+          addItem();
+        }}
+      >
+        <div className="input-wrapper">
+          <input
+            className="container-input"
+            type="text"
+            placeholder="What do we need to do?"
+            onChange={(e) => setUserInput(e.target.value)}
+            value={userInput}
+          />
+        </div>
+        <button type="submit" className="button add-button">
+          Add Task
+        </button>
+      </form>
+      <ul>
+        {list.map((item, index) => (
+          <li
+            key={index}
+            className={`list-item ${item.isChecked ? "checked" : ""}`}
           >
-            Add Task
-          </button>
-        </form>
-        <ul>
-          {this.state.list.map((item, index) => (
-            <li
-              key={index}
-              className={`list-item ${item.isChecked ? "checked" : ""}`}
-              onClick={() => this.toggleItem(index)}
-            >
-              <div className="item-container">
-                <div className="item-container-wrapper">
-                  <p className="item-text">{item.text}</p>
-                  <Switch
-                    id={`switch-${index}`}
-                    isChecked={item.isChecked}
-                    onToggle={() => this.toggleItem(index)}
-                  />
-                </div>
-                <button
-                  className="button delete-one-button"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    this.deleteItem(index);
-                  }}
-                >
-                  Delete Task
-                </button>
+            <div className="item-container">
+              <div className="item-container-wrapper">
+                <p className="item-text">{item.text}</p>
+                <Switch
+                  id={`switch-${index}`}
+                  isChecked={item.isChecked}
+                  onToggle={() => toggleItem(index)}
+                />
               </div>
-            </li>
-          ))}
-        </ul>
+              <button
+                className="button delete-one-button"
+                onClick={() => deleteItem(index)}
+              >
+                Delete Task
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+      {list.length > 0 && (
         <button
           className="button delete-button"
-          onClick={() => this.deleteItems()}
+          ref={deleteAllRef}
+          onClick={deleteItems}
         >
           Delete All
         </button>
-      </div>
-    );
-  }
-}
+      )}
+    </div>
+  );
+};

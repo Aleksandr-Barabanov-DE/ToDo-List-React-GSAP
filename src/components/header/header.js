@@ -1,15 +1,10 @@
-import { Component } from "react";
+import React, { useEffect } from "react";
 import "../header/header.css";
 import image from "../images/todo-logo.png";
 import gsap from "gsap";
 
-export class Header extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
-  componentDidMount() {
+export const Header = () => {
+  useEffect(() => {
     gsap.to(".header-image", {
       duration: 1.5,
       opacity: 1,
@@ -18,20 +13,15 @@ export class Header extends Component {
     });
     gsap.fromTo(
       ".header-title",
-      {
-        opacity: 0,
-        x: -10,
-      },
+      { opacity: 0, x: -10 },
       { opacity: 1, x: 0, duration: 1 }
     );
-  }
+  }, []);
 
-  render() {
-    return (
-      <div className="header">
-        <h1 className="header-title">ToDo List</h1>
-        <img className="header-image" src={image} alt="todo list" />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="header">
+      <h1 className="header-title">ToDo List</h1>
+      <img className="header-image" src={image} alt="todo list" />
+    </div>
+  );
+};
