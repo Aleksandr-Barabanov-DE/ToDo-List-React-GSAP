@@ -40,8 +40,8 @@ ToDo List is a dynamic web application designed to help users create, manage, an
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/your-username/todo-list.git
+  
+   [git clone https://github.com/your-username/todo-list.git](https://github.com/Aleksandr-Barabanov-DE/ToDo-List-React-GSAP.git)
 ## Navigate to the Project Directory
 
 To navigate to the project directory, run:
