@@ -46,12 +46,41 @@ ToDo List is a dynamic web application designed to help users create, manage, an
 
 To navigate to the project directory, run:
 
-```bash
+
 cd todo-list
 
 ## Install the Necessary Dependencies
 
 To install the necessary dependencies, run:
 
-```bash
+
 npm install
+
+## Running the Application
+
+To start the application in development mode, run:
+
+
+npm start
+
+## Building for Production
+
+To build the app for production to the build folder, run:
+
+
+npm run build
+
+## Usage
+
+- Add new tasks using the input field.
+- Edit or delete tasks as needed.
+- Use the **Delete All** button to clear all tasks.
+- All tasks are stored in **localStorage**, so they remain available even after refreshing the page.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a pull request or open an issue.
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for more details.
