@@ -81,6 +81,24 @@ npm run build
 
 Contributions are welcome! Please feel free to submit a pull request or open an issue.
 
-## License
+## Author
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
+Barabanov Aleksandr
+
+
+## Contacts
+
+<div>
+  <a href="https://www.linkedin.com/in/aleksandr-barabanov/">
+    <img src="https://img.shields.io/badge/linkedin-%230077B5.svg?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a> 
+  <a href="mailto:barabanov.codes@gmail.com">
+    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
+  </a>
+  <a href="https://profile.indeed.com/?hl=en_CA&co=CA&from=gnav-notifcenter">
+    <img src="https://img.shields.io/badge/indeed-003A9B?style=for-the-badge&logo=indeed&logoColor=white" alt="Indeed"/>
+  </a>
+  <a href="https://www.codewars.com/users/Aleksandr-Barabanov">
+    <img src="https://img.shields.io/badge/Codewars-B1361E?style=for-the-badge&logo=codewars&logoColor=grey" alt="Codewars"/>
+  </a>
+</div>
